@@ -5,39 +5,42 @@
 ### Problema
 > Qual problema financeiro seu agente resolve?
 
-[Sua descrição aqui]
+O "Consumismo Invisível" e a desorganização financeira de usuários que possuem alta frequência de transações (compras por impulso, delivery e assinaturas digitais). O foco é mitigar o gasto impulsivo através de intervenções inteligentes em tempo real.
 
 ### Solução
 > Como o agente resolve esse problema de forma proativa?
 
-[Sua descrição aqui]
+A NEON-Fin atua como uma camada de inteligência local. Ela monitora padrões de consumo e intervém proativamente com "Insights de Impacto". Por rodar localmente via Ollama, ela garante que o histórico de compras do usuário nunca saia do ambiente seguro do dispositivo, oferecendo análises preditivas de saldo e alertas de gastos supérfluos.
 
 ### Público-Alvo
 > Quem vai usar esse agente?
 
-[Sua descrição aqui]
+Jovens profissionais, estudantes de tecnologia e pessoas que buscam uma relação mais leve e menos burocrática com o dinheiro.
 
 ---
 
 ## Persona e Tom de Voz
 
 ### Nome do Agente
-[Nome escolhido]
+NEON-Fin
 
 ### Personalidade
 > Como o agente se comporta? (ex: consultivo, direto, educativo)
 
-[Sua descrição aqui]
+Consultiva, Perspicaz e Leal. A NEON-Fin se comporta como uma mentora técnica de alto desempenho. Sua personalidade é inspirada em interfaces de tecnologia avançada: eficiente, rápida e focada em resultados.
 
 ### Tom de Comunicação
 > Formal, informal, técnico, acessível?
 
-[Sua descrição aqui]
+Informal e Acessível. Usa uma linguagem direta, sem termos técnicos complexos, mas mantendo a autoridade sobre os dados. É o tom de "conversa de chat".
 
 ### Exemplos de Linguagem
-- Saudação: [ex: "Olá! Como posso ajudar com suas finanças hoje?"]
-- Confirmação: [ex: "Entendi! Deixa eu verificar isso para você."]
-- Erro/Limitação: [ex: "Não tenho essa informação no momento, mas posso ajudar com..."]
+
+- Saudação: "Sistemas locais online. Integridade de dados garantida. Como vamos otimizar seu saldo hoje?"
+
+- Confirmação: "Input processado localmente. Meta de economia atualizada no seu cofre seguro."
+
+- Erro/Limitação: "Meus módulos de análise externa estão desativados por segurança. Posso ajudar com os dados locais de saldo e gastos?"
 
 ---
 
@@ -46,23 +49,25 @@
 ### Diagrama
 
 ```mermaid
-flowchart TD
-    A[Cliente] -->|Mensagem| B[Interface]
-    B --> C[LLM]
-    C --> D[Base de Conhecimento]
-    D --> C
-    C --> E[Validação]
-    E --> F[Resposta]
+graph TD
+    User[Usuário] -->|Interação| UI[Interface Streamlit/Python]
+    UI -->|Query| Back[Backend Python]
+    Back -->|Contexto| DB[(JSON: Histórico de Gastos)]
+    Back -->|Prompt| Ollama{Ollama Runtime}
+    Ollama -->|Inference| LLM[Llama 3.2 / Finance-Llama]
+    LLM -->|Analytic Response| Back
+    Back -->|Visual Feedback| UI
 ```
 
 ### Componentes
 
 | Componente | Descrição |
 |------------|-----------|
-| Interface | [ex: Chatbot em Streamlit] |
-| LLM | [ex: GPT-4 via API] |
-| Base de Conhecimento | [ex: JSON/CSV com dados do cliente] |
-| Validação | [ex: Checagem de alucinações] |
+| Interface | Front-end minimalista desenvolvido em Python (Streamlit). |
+| Orquestrador | Python 3.11+ utilizando a biblioteca ollama-python. |
+| LLM | Llama 3.2 via Ollama, garantindo latência zero e privacidade total. |
+| Base de Conhecimento | Estrutura JSON local simulando o Open Finance e histórico de transações. |
+| Validação | Processamento 100% offline, eliminando o envio de dados para nuvens externas. |
 
 ---
 
@@ -70,12 +75,17 @@ flowchart TD
 
 ### Estratégias Adotadas
 
-- [ ] [ex: Agente só responde com base nos dados fornecidos]
-- [ ] [ex: Respostas incluem fonte da informação]
-- [ ] [ex: Quando não sabe, admite e redireciona]
-- [ ] [ex: Não faz recomendações de investimento sem perfil do cliente]
+- [ ] Local Inference: O processamento local via Ollama impede que dados sensíveis sejam enviados para servidores de terceiros.
+
+- [ ] Grounding de Dados: A IA é instruída a priorizar os dados do arquivo JSON para qualquer resposta numérica.
+
+- [ ] System Prompt Rígido: Define que a IA não pode inventar transações que não constam no histórico local.
 
 ### Limitações Declaradas
 > O que o agente NÃO faz?
 
-[Liste aqui as limitações explícitas do agente]
+- Não realiza operações bancárias reais (Pix/Pagamentos).
+
+- Não acessa a internet para cotações em tempo real (foco em dados locais).
+
+- Não substitui aconselhamento financeiro legal e profissional.
