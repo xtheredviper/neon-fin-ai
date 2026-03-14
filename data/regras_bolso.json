@@ -1,0 +1,11 @@
+{
+  "limites_mensais": {
+    "lazer": 400.00,
+    "delivery": 250.00,
+    "compras_impulso": 200.00
+  },
+  "trava_seguranca": {
+    "bloqueio_critico": true,
+    "aviso_porcentagem_saldo": 0.20
+  }
+}
