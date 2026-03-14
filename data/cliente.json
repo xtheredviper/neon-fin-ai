@@ -1,0 +1,14 @@
+{
+  "cliente": "Ana Paula",
+  "perfil": "Desenvolvedora Jr / Gamer",
+  "status_financeiro": "Consumista em Recuperação",
+  "meta_ativa": {
+    "nome": "Upgrade de Monitor 4K / Setup Gamer",
+    "valor_total": 2500.00,
+    "valor_poupado": 850.00
+  },
+  "preferencias": {
+    "estilo_ia": "Cyberpunk/Neon",
+    "frequencia_alertas": "Alta"
+  }
+}
