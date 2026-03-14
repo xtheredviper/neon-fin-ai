@@ -2,17 +2,14 @@
 
 ## Dados Utilizados
 
-Descreva se usou os arquivos da pasta `data`, por exemplo:
+O agente utiliza arquivos locais simulando uma estrutura de Open Finance para garantir que a análise de consumo seja precisa e personalizada.
 
 | Arquivo | Formato | Utilização no Agente |
 |---------|---------|---------------------|
-| `historico_atendimento.csv` | CSV | Contextualizar interações anteriores |
-| `perfil_investidor.json` | JSON | Personalizar recomendações |
-| `produtos_financeiros.json` | JSON | Sugerir produtos adequados ao perfil |
-| `transacoes.csv` | CSV | Analisar padrão de gastos do cliente |
-
-> [!TIP]
-> **Quer um dataset mais robusto?** Você pode utilizar datasets públicos do [Hugging Face](https://huggingface.co/datasets) relacionados a finanças, desde que sejam adequados ao contexto do desafio.
+| `cliente.json` | JSON| Contém o perfil, metas (ex: novo setup) e teto de gastos diários. |
+| `extrato_transacoes.csv` | CSV | Registro detalhado de compras (essenciais vs. supérfluas). |
+| `regras_bolso.json` | JSON | Limites pré-definidos pelo usuário para categorias como "Lazer" e "Delivery". |
+| `base_dicas.csv` | CSV | Biblioteca de frases e estratégias de economia com tom moderno/gamer. |
 
 ---
 
@@ -20,7 +17,7 @@ Descreva se usou os arquivos da pasta `data`, por exemplo:
 
 > Você modificou ou expandiu os dados mockados? Descreva aqui.
 
-[Sua descrição aqui]
+Os dados foram expandidos para incluir Tags de Comportamento. Em vez de apenas "Alimentação", as transações no CSV agora possuem tags como impulso, essencial ou assinatura_esquecida. Isso permite que a NEON-Fin identifique padrões de consumo emocional, algo fundamental para o público de jovens profissionais.
 
 ---
 
@@ -29,12 +26,12 @@ Descreva se usou os arquivos da pasta `data`, por exemplo:
 ### Como os dados são carregados?
 > Descreva como seu agente acessa a base de conhecimento.
 
-[ex: Os JSON/CSV são carregados no início da sessão e incluídos no contexto do prompt]
+Os arquivos são lidos localmente pelo script Python utilizando as bibliotecas json e pandas. Os dados são carregados no momento em que o usuário inicia o chat, criando uma "memória de curto prazo" para a sessão.
 
 ### Como os dados são usados no prompt?
 > Os dados vão no system prompt? São consultados dinamicamente?
 
-[Sua descrição aqui]
+Os dados são injetados dinamicamente no System Prompt. A cada nova interação, o backend filtra as últimas 5 transações e o saldo atual, enviando um resumo estruturado para o Ollama. Isso garante que a IA sempre saiba "onde o dinheiro está indo" sem precisar ler o arquivo inteiro a cada segundo.
 
 ---
 
@@ -44,12 +41,14 @@ Descreva se usou os arquivos da pasta `data`, por exemplo:
 
 ```
 Dados do Cliente:
-- Nome: João Silva
-- Perfil: Moderado
-- Saldo disponível: R$ 5.000
+- Nome: Ana Paula
+- Status: Estudante de Tech / Backend Jr.
+- Saldo Disponível: R$ 1.250,40
+- Meta Ativa: "Upgrade de Monitor 4K" (Progresso: 40%)
 
 Últimas transações:
-- 01/11: Supermercado - R$ 450
-- 03/11: Streaming - R$ 55
+- 10/03: Steam Games - R$ 159,90 (Tag: impulso)
+- 11/03: Ifood - R$ 65,00 (Tag: lazer)
+- 12/03: Assinatura Cloud - R$ 29,90 (Tag: essencial)
 ...
 ```
