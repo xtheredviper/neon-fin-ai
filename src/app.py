@@ -13,7 +13,7 @@ def consultar_ai(pergunta, dados_cliente, dados_extrato):
     contexto = f"Dados: {dados_cliente}\nExtrato: {dados_extrato.tail(10).to_string()}"
     
     resposta = ollama.chat(model='llama3.2', messages=[
-        {'role': 'system', 'content': 'Você é a NEON-Fin, assistente financeira Cyberpunk.'},
+        {'role': 'system', 'content': 'Você é a NEON-Fin, assistente financeira Cyberpunk. Responda de forma direta e natural, sem mostrar código de programação nas respostas.'},
         {'role': 'user', 'content': f"{contexto}\n\nPergunta: {pergunta}"}
     ])
     return resposta['message']['content']
