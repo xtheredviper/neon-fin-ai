@@ -6,11 +6,9 @@ Esta pasta contém o código do seu agente financeiro.
 
 ```
 src/
-├── app.py              # Interface visual em Streamlit (A "cara" da NEON-Fin)
-├── agente.py           # O "cérebro" que conversa com o Ollama
-├── database_manager.py # Lógica para ler seus arquivos JSON e CSV
-├── requirements.txt    # O que precisa instalar
-└── data/               # Onde você salvou os arquivos que criamos antes
+ ├── app.py           # Código principal (Interface + Lógica da IA + Leitura de Dados)
+ ├── requirements.txt # Dependências do projeto
+ └── data/            # Pasta com os arquivos cliente.json e extrato_transacoes.csv
 ```
 
 ## Exemplo de requirements.txt
@@ -24,12 +22,12 @@ pandas
 ## Como Rodar
 
 ```bash
-# 1. Certifique-se de que o Ollama está rodando no seu PC e você baixou o modelo:
+# 1. Certifique-se de que o Ollama está rodando no seu PC e baixe o modelo:
 ollama pull llama3.2
 
 # 2. Instalar as dependências do Python
-pip install -r src/requirements.txt
+pip install streamlit pandas ollama
 
 # 3. Rodar a aplicação Neon-Fin
-streamlit run src/app.py
+python -m streamlit run src/app.py
 ```
