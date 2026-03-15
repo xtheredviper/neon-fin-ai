@@ -6,7 +6,7 @@
 O "Consumismo Invisível" e a desorganização financeira causada por uma alta frequência de transações impulsivas (delivery, games e pequenas compras não planejadas), que afastam o usuário de seus objetivos de longo prazo.
 
 ### A Solução
-A **NEON-Fin** atua como uma camada de inteligência local. Ela não apenas registra gastos, mas intervém com "Insights de Impacto", analisando o comportamento do usuário e protegendo seus sonhos através de uma análise técnica e motivacional.
+A **NEON-Fin** atua como uma camada de inteligência local. Ela não apenas registra gastos, mas intervém com "Insights de Impacto", analisando o comportamento do usuário e protegendo seus objetivos através de uma análise técnica e motivacional.
 
 ### Público-Alvo
 Jovens profissionais, estudantes de tecnologia (como a comunidade da **DIO**) e entusiastas de hardware que precisam de um "consciente digital" para equilibrar diversão e economia.
@@ -15,34 +15,32 @@ Jovens profissionais, estudantes de tecnologia (como a comunidade da **DIO**) e 
 
 ## 👤 2. Persona e Tom de Voz
 
-- **Nome:** NEON-Fin
-- **Personalidade:** Consultiva, perspicaz e focada em performance. Inspirada em interfaces futuristas e sistemas de monitoramento.
-- **Tom de Voz:** Informal, moderno e tecnológico. Usa gírias de dev e termos de sistema.
-- **Exemplo de fala:** *"Sistemas online. Detectando dreno de capital... Ana Paula, esse gasto em 'impulso' vai atrasar seu setup novo em 15 dias. Confirmar operação?"*
+* **Nome:** NEON-Fin
+* **Personalidade:** Consultiva, perspicaz e focada em performance. Inspirada em interfaces futuristas e sistemas de monitoramento.
+* **Tom de Voz:** Informal, moderno e tecnológico. Usa gírias de dev e termos de sistema.
+* **Exemplo de fala:** *"Sistemas online. Detectando dreno de capital... Ana Paula, esse gasto em 'impulso' vai atrasar seu setup novo em 15 dias. Confirmar operação?"*
 
 ---
 
 ## 🏗️ 3. Arquitetura e Stack
 
-O projeto foi construído priorizando a soberania dos dados e a performance local.
+O projeto foi construído priorizando a soberania dos dados e a performance local (executado em hardware dedicado **NVIDIA RTX**).
 
-- **LLM Engine:** Ollama (Modelo Llama 3.2)
-- **Interface:** Streamlit (UI Dark/Neon)
-- **Linguagem:** Python 3.11+
-- **Processamento de Dados:** Pandas para análise de CSV e JSON para configurações.
+* **LLM Engine:** Ollama (Modelo Llama 3.2)
+* **Interface:** Streamlit (UI Dark/Neon)
+* **Linguagem:** Python 3.14
+* **Processamento de Dados:** Pandas para análise de CSV e JSON para configurações.
 
 ---
 
-## 📂 4. Base de Conhecimento
+## 📂 4. Base de Conhecimento (Grounding)
 
-A NEON-Fin fundamenta suas respostas (técnica de *Grounding*) em dados locais estruturados:
+A NEON-Fin fundamenta suas respostas em dados locais estruturados para garantir precisão:
 
 | Arquivo | Formato | Utilização |
 | :--- | :--- | :--- |
-| `cliente.json` | JSON | Perfil da cliente Ana Paula, metas (Ex: Monitor 4K) e status. |
-| `extrato_transacoes.csv` | CSV | Histórico detalhado com tags de `impulso` e `essencial` (Ex: Assinatura DIO PRO). |
-| `regras_bolso.json` | JSON | Limites de gastos definidos pela usuária para categorias críticas. |
-| `base_dicas.csv` | CSV | Biblioteca de gatilhos comportamentais e dicas financeiras. |
+| `cliente.json` | JSON | Perfil da cliente **Ana Paula**, metas e status do sistema. |
+| `extrato_transacoes.csv` | CSV | Histórico detalhado de gastos com tags de categoria e impacto. |
 
 ---
 
@@ -50,31 +48,33 @@ A NEON-Fin fundamenta suas respostas (técnica de *Grounding*) em dados locais e
 
 Para garantir respostas precisas e evitar alucinações, foram aplicadas as seguintes técnicas:
 
-- **System Prompt Rígido:** Define a persona e proíbe a invenção de dados financeiros.
-- **Few-Shot Prompting:** Exemplos reais de interações "Pergunta e Resposta" inseridos no contexto para calibrar o tom de voz.
-- **Chain-of-Thought (Cadeia de Pensamento):** Instrução para que a IA analise o saldo e as tags de impulso antes de emitir qualquer opinião de compra.
+1.  **System Prompt Rígido:** Define a persona e proíbe a invenção de dados financeiros não presentes nos arquivos.
+2.  **Chain-of-Thought:** Instrução para que a IA analise o extrato e as metas antes de emitir qualquer opinião ou cálculo.
+3.  **Context Injection:** Os dados do perfil e as últimas transações são injetados diretamente no prompt a cada consulta.
 
 ---
 
 ## 📊 6. Avaliação e Métricas
 
-O agente é avaliado com base em três pilares fundamentais:
+O agente é avaliado com base em quatro pilares fundamentais:
 
 | Métrica | O que avalia | Status |
 | :--- | :--- | :--- |
-| **Assertividade** | O agente somou corretamente as tags de "impulso" do CSV? | ✅ Sucesso |
+| **Assertividade** | O agente somou corretamente os gastos do CSV? | ✅ Sucesso |
 | **Segurança** | O agente evitou inventar informações fora da base local? | ✅ Sucesso |
-| **Coerência** | A resposta faz sentido para o perfil de "Consumista em Recuperação"? | ✅ Sucesso |
-| **Privacidade** | Os dados saíram da rede local? | 🔒 Protegido (Offline) |
+| **Coerência** | A resposta reflete o perfil de "Consumista em Recuperação"? | ✅ Sucesso |
+| **Privacidade** | Os dados saíram da rede local? | 🔒 Protegido (Local) |
 
 ---
 
 ## 🚀 7. Como Executar
 
-1. **Setup da IA (Ollama):**
-   - Instale o [Ollama](https://ollama.com/).
-   - No terminal, execute: `ollama pull llama3.2`.
+### 1. Setup da IA (Ollama)
+* Instale o [Ollama](https://ollama.com/).
+* No terminal, execute o comando para baixar o modelo:
+    `ollama pull llama3.2`
 
-2. **Instalação das Dependências:**
-   ```bash
-   pip install streamlit ollama pandas
+### 2. Instalação das Dependências
+No terminal do seu projeto, instale as bibliotecas necessárias:
+```bash
+pip install streamlit ollama pandas
