@@ -1,80 +1,80 @@
-# ⚡ NEON-Fin: Gestão Financeira Local & Inteligente
+# ⚡ NEON-Fin: Smart & Local Financial Management
 
-## 🎯 1. Caso de Uso
+## 🎯 1. Use Case
 
-### O Problema
-O "Consumismo Invisível" e a desorganização financeira causada por uma alta frequência de transações impulsivas (delivery, games e pequenas compras não planejadas), que afastam o usuário de seus objetivos de longo prazo.
+### The Problem
+"Invisible Consumerism" and financial disorganization caused by a high frequency of impulsive transactions (delivery, games, and small unplanned purchases), which drift the user away from their long-term goals.
 
-### A Solução
-A **NEON-Fin** atua como uma camada de inteligência local. Ela não apenas registra gastos, mas intervém com "Insights de Impacto", analisando o comportamento do usuário e protegendo seus objetivos através de uma análise técnica e motivacional.
+### The Solution
+**NEON-Fin** acts as a local intelligence layer. It doesn't just record expenses; it intervenes with "Impact Insights," analyzing user behavior and protecting their goals through technical and motivational analysis.
 
-### Público-Alvo
-Jovens profissionais, estudantes de tecnologia (como a comunidade da **DIO**) e entusiastas de hardware que precisam de um "consciente digital" para equilibrar diversão e economia.
-
----
-
-## 👤 2. Persona e Tom de Voz
-
-* **Nome:** NEON-Fin
-* **Personalidade:** Consultiva, perspicaz e focada em performance. Inspirada em interfaces futuristas e sistemas de monitoramento.
-* **Tom de Voz:** Informal, moderno e tecnológico. Usa gírias de dev e termos de sistema.
-* **Exemplo de fala:** *"Sistemas online. Detectando dreno de capital... Ana Paula, esse gasto em 'impulso' vai atrasar seu setup novo em 15 dias. Confirmar operação?"*
+### Target Audience
+Young professionals, tech students (like the **DIO** community), and hardware enthusiasts who need a "digital conscience" to balance fun and savings.
 
 ---
 
-## 🏗️ 3. Arquitetura e Stack
+## 👤 2. Persona and Tone of Voice
 
-O projeto foi construído priorizando a soberania dos dados e a performance local (executado em hardware dedicado **NVIDIA RTX**).
-
-* **LLM Engine:** Ollama (Modelo Llama 3.2)
-* **Interface:** Streamlit (UI Dark/Neon)
-* **Linguagem:** Python 3.14
-* **Processamento de Dados:** Pandas para análise de CSV e JSON para configurações.
+* **Name:** NEON-Fin
+* **Personality:** Advisory, insightful, and performance-focused. Inspired by futuristic interfaces and monitoring systems.
+* **Tone of Voice:** Informal, modern, and tech-driven. Uses dev slang and system terminology.
+* **Catchphrase Example:** *"Systems online. Detecting capital drain... Ana Paula, this 'impulse' expense will delay your new setup by 15 days. Confirm operation?"*
 
 ---
 
-## 📂 4. Base de Conhecimento (Grounding)
+## 🏗️ 3. Architecture and Stack
 
-A NEON-Fin fundamenta suas respostas em dados locais estruturados para garantir precisão:
+The project was built prioritizing data sovereignty and local performance (running on dedicated **NVIDIA RTX** hardware).
 
-| Arquivo | Formato | Utilização |
+* **LLM Engine:** Ollama (Llama 3.2 Model)
+* **Interface:** Streamlit (Dark/Neon UI)
+* **Language:** Python 3.14
+* **Data Processing:** Pandas for CSV analysis and JSON for configurations.
+
+---
+
+## 📂 4. Knowledge Base (Grounding)
+
+NEON-Fin bases its responses on structured local data to ensure accuracy:
+
+| File | Format | Usage |
 | :--- | :--- | :--- |
-| `cliente.json` | JSON | Perfil da cliente **Ana Paula**, metas e status do sistema. |
-| `extrato_transacoes.csv` | CSV | Histórico detalhado de gastos com tags de categoria e impacto. |
+| `cliente.json` | JSON | **Ana Paula's** profile, goals, and system status. |
+| `extrato_transacoes.csv` | CSV | Detailed spending history with category and impact tags. |
 
 ---
 
-## 🤖 5. Engenharia de Prompt
+## 🤖 5. Prompt Engineering
 
-Para garantir respostas precisas e evitar alucinações, foram aplicadas as seguintes técnicas:
+To ensure accurate responses and avoid hallucinations, the following techniques were applied:
 
-1.  **System Prompt Rígido:** Define a persona e proíbe a invenção de dados financeiros não presentes nos arquivos.
-2.  **Chain-of-Thought:** Instrução para que a IA analise o extrato e as metas antes de emitir qualquer opinião ou cálculo.
-3.  **Context Injection:** Os dados do perfil e as últimas transações são injetados diretamente no prompt a cada consulta.
+1. **Strict System Prompt:** Defines the persona and prohibits the invention of financial data not present in the files.
+2. **Chain-of-Thought:** Instructions for the AI to analyze the statement and goals before issuing any opinion or calculation.
+3. **Context Injection:** Profile data and latest transactions are injected directly into the prompt with each query.
 
 ---
 
-## 📊 6. Avaliação e Métricas
+## 📊 6. Evaluation and Metrics
 
-O agente é avaliado com base em quatro pilares fundamentais:
+The agent is evaluated based on four fundamental pillars:
 
-| Métrica | O que avalia | Status |
+| Metric | What it evaluates | Status |
 | :--- | :--- | :--- |
-| **Assertividade** | O agente somou corretamente os gastos do CSV? | ✅ Sucesso |
-| **Segurança** | O agente evitou inventar informações fora da base local? | ✅ Sucesso |
-| **Coerência** | A resposta reflete o perfil de "Consumista em Recuperação"? | ✅ Sucesso |
-| **Privacidade** | Os dados saíram da rede local? | 🔒 Protegido (Local) |
+| **Assertiveness** | Did the agent correctly sum the expenses from the CSV? | ✅ Success |
+| **Safety** | Did the agent avoid inventing information outside the local base? | ✅ Success |
+| **Coherence** | Does the response reflect the "Recovering Consumer" profile? | ✅ Success |
+| **Privacy** | Did the data leave the local network? | 🔒 Protected (Local) |
 
 ---
 
-## 🚀 7. Como Executar
+## 🚀 7. How to Run
 
-### 1. Setup da IA (Ollama)
-* Instale o [Ollama](https://ollama.com/).
-* No terminal, execute o comando para baixar o modelo:
+### 1. AI Setup (Ollama)
+* Install [Ollama](https://ollama.com/).
+* In the terminal, run the command to download the model:
     `ollama pull llama3.2`
 
-### 2. Instalação das Dependências
-No terminal do seu projeto, instale as bibliotecas necessárias:
+### 2. Dependency Installation
+In your project terminal, install the necessary libraries:
 ```bash
 pip install streamlit ollama pandas
